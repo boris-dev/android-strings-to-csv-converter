@@ -56,6 +56,12 @@
             <version>5.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.jfoenix</groupId>
+            <artifactId>jfoenix</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+
         <!-- Apache Commons -->
 
         <dependency>
@@ -85,6 +91,11 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.5</version>
         </dependency>
 
     </dependencies>
