@@ -33,20 +33,18 @@ public class MainApp extends Application {
         final TextField tsvFilePath = new TextField();
         Button fileChooserButton = new Button("Choose tsv file");
 
-        fileChooserButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent event) {
-                FileChooser fileChooser = new FileChooser();
-                fileChooser.setTitle("Open tsv File");
-                fileChooser.getExtensionFilters().addAll(
-                        new FileChooser.ExtensionFilter("All Files", "*.*"),
-                        new FileChooser.ExtensionFilter("CSV", "*.csv"),
-                        new FileChooser.ExtensionFilter("TSV", "*.tsv")
-                );
+        fileChooserButton.setOnMouseClicked(event -> {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Open tsv File");
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("All Files", "*.*"),
+                    new FileChooser.ExtensionFilter("CSV", "*.csv"),
+                    new FileChooser.ExtensionFilter("TSV", "*.tsv")
+            );
 
-                File file = fileChooser.showOpenDialog(stage);
-                if (file != null) {
-                    tsvFilePath.setText(file.getAbsolutePath());
-                }
+            File file = fileChooser.showOpenDialog(stage);
+            if (file != null) {
+                tsvFilePath.setText(file.getAbsolutePath());
             }
         });
 
@@ -55,24 +53,18 @@ public class MainApp extends Application {
         HBox hBox2 = new HBox();
         final TextField resFolderFilePath = new TextField();
         Button resFolderChooserButton = new Button("Choose res folder");
-        resFolderChooserButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent event) {
-                DirectoryChooser chooser = new DirectoryChooser();
-                chooser.setTitle("Open Resource Folder");
-                File file = chooser.showDialog(stage);
-                if (file != null) {
-                    resFolderFilePath.setText(file.getAbsolutePath());
-                }
+        resFolderChooserButton.setOnMouseClicked(event -> {
+            DirectoryChooser chooser = new DirectoryChooser();
+            chooser.setTitle("Open Resource Folder");
+            File file = chooser.showDialog(stage);
+            if (file != null) {
+                resFolderFilePath.setText(file.getAbsolutePath());
             }
         });
         hBox2.getChildren().addAll(resFolderFilePath, resFolderChooserButton);
         Button convert = new Button("Convert");
 
-        convert.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent event) {
-                new CsvConverter(tsvFilePath.getText(), resFolderFilePath.getText()).convert();
-            }
-        });
+        convert.setOnMouseClicked(event -> new CsvConverter(tsvFilePath.getText(), resFolderFilePath.getText()).convert());
 
         vBox.getChildren().addAll(hBox1, hBox2, convert);
         log.debug("Showing JFX scene");

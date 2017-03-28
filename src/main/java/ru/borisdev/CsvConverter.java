@@ -26,17 +26,15 @@ public class CsvConverter {
 
     public void convert() {
         try {
-            AndroidStringTable androidStringTable = new AndroidStringTable(FileUtils.readFileToString(new File(csvFile), Charset.forName("UTF-8")));
-
+            AndroidStringTable androidStringTable = new AndroidStringTable(FileUtils.readLines(new File(csvFile), Charset.forName("UTF-8")));
             List<AndroidStringColumn> androidStringColumnList = androidStringTable.getColumns();
-            androidStringColumnList.forEach(
-                    androidStringColumn -> new StringFileName(
-                            resFolder,
-                            androidStringColumn.header(),
-                            androidStringColumn.content())
-                            .create()
-            );
-
+            for (AndroidStringColumn androidStringColumn : androidStringColumnList) {
+                new StringFileName(
+                        resFolder,
+                        androidStringColumn.header(),
+                        androidStringColumn.content())
+                        .create();
+            }
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
